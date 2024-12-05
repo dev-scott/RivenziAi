@@ -10,8 +10,8 @@ import ReduxProvider from '@/providers/redux-provider'
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Slide',
-  description: 'Automate DMs and comments on instagram',
+  title: 'Rivenzi',
+  description: 'Automate DMs and comments on instagram && other social network',
 }
 
 export default function RootLayout({
@@ -24,11 +24,12 @@ export default function RootLayout({
       <html lang="en">
         <body
           suppressHydrationWarning
-          className={jakarta.className}
+          className={`${jakarta.className}  `}
         >
           <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
+            defaultTheme="system"
+            enableSystem
             disableTransitionOnChange
           >
             <ReduxProvider>
