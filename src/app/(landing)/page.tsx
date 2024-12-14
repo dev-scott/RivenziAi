@@ -315,9 +315,9 @@ export default function Home() {
           <div className='relative flex flex-col items-center gap-2'>
             <span className='text-primary'>PRICING</span>
             <h1 className='text-center text-xl font-semibold md:text-3xl'>
-              Cloose the plan that&apos;s right for you
+              Choose the plan that&apos;s right for you
             </h1>
-            {window.innerWidth > 768 && (
+            {!isMobile && (
               <span className='text-center text-foreground/70'>
                 Generic AI tools won&apos;t suffice. Our platform is
                 purpose-built to provide exceptional <br /> AI-driven solutions
