@@ -13,11 +13,23 @@ import {
   MessageSquare,
   Sparkles,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Home() {
   const [pricingPeriod, setPricingPeriod] = useState<'month' | 'year'>('month');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const features = [
     {
@@ -234,7 +246,14 @@ export default function Home() {
                 Empower Your Social Media: Automate, Engage, Succeed!
               </h1>
               <span className='text-center'>
-                {window.innerWidth > 768 ? (
+                {isMobile ? (
+                  <>
+                    Unlock seamless social media management with our platform.
+                    Automate responses, engage your audience, and track
+                    performance with AI technology. Ditch manual updates for a
+                    smarter customer connection!
+                  </>
+                ) : (
                   <>
                     Experience seamless social media management like never
                     before. Our platform empowers you to automate responses,
@@ -243,13 +262,6 @@ export default function Home() {
                     updates and hello to a smarter way to connect with your
                     customers. Elevate your brand&apos;s online presence and
                     watch your engagement soar!
-                  </>
-                ) : (
-                  <>
-                    Unlock seamless social media management with our platform.
-                    Automate responses, engage your audience, and track
-                    performance with AI technology. Ditch manual updates for a
-                    smarter customer connection !
                   </>
                 )}
               </span>
