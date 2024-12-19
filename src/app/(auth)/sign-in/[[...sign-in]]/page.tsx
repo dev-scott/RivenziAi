@@ -34,7 +34,8 @@ export default function Page() {
           >
             <h1 className='text-4xl font-bold text-primary'>Rivenzi</h1>
             <p className='max-w-sm text-lg text-gray-600'>
-              Automate your social media responses with artificial intelligence
+              Automate your social media responses with artificial .
+              intelligence
             </p>
           </motion.div>
         </div>
