@@ -1,5 +1,5 @@
 'use client';
-import { usePaths } from '@/hook/use-nav';
+import { usePaths } from '@/hooks/use-nav';
 import React from 'react';
 import Items from './items';
 import { Separator } from '@/components/ui/separator';

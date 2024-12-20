@@ -29,11 +29,12 @@
     "framer-motion": "^11.14.4",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
-    "lucide-react": "^0.468.0",
+    "lucide-react": "^0.469.0",
     "next": "15.1.0",
     "prettier": "^3.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "recharts": "^2.15.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^11.0.3"

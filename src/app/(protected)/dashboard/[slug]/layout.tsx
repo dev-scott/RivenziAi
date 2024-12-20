@@ -1,16 +1,30 @@
 import React from 'react';
-import { HydrationBoundary } from '@tanstack/react-query';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 import Sidebar from '@/components/global/sidebar';
 import InfoBar from '@/components/global/infobar';
+import {
+  PrefetchUserAutnomations,
+  PrefetchUserProfile,
+} from '@/react-query/prefetch';
 type Props = {
   children: React.ReactNode;
   params: { slug: string };
 };
 
-const layout = ({ children, params }: Props) => {
+const layout = async ({ children, params }: Props) => {
   console.log('param', params.slug);
+
+  const query = new QueryClient();
+
+  await PrefetchUserProfile(query);
+  await PrefetchUserAutnomations(query);
+
   return (
-    <HydrationBoundary>
+    <HydrationBoundary state={dehydrate(query)}>
       <div className='p-3'>
         {/* there is the side bar */}
         <Sidebar slug={params.slug} />

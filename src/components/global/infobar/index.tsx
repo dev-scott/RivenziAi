@@ -1,6 +1,6 @@
 'use client';
 import { PAGE_BREAD_CRUMBS } from '@/constants/pages';
-import { usePaths } from '@/hook/use-nav';
+import { usePaths } from '@/hooks/use-nav';
 import React from 'react';
 import Sheet from '../sheet';
 import { Menu } from 'lucide-react';
@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import ClerkAuthState from '../clerk-auth-state';
 import Search from '../search';
 import CreateAutomation from '../create-automation';
+import MainBreadCrumb from '../bread-crumbs/main-bread-crumb';
 
 type Props = {
   slug: string;
@@ -60,6 +61,7 @@ const InfoBar = ({ slug }: Props) => {
         </div>
         <div>
           {/* <MainBreadCrumb page={page === slug ? 'home' : page} slug={slug} /> */}
+          <MainBreadCrumb page={page === slug ? 'Home' : page} slug={slug} />
         </div>
       </div>
     )
