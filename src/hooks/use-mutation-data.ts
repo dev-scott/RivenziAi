@@ -23,10 +23,7 @@ export const useMutationDataState = (mutationKey: MutationKey) => {
 
 export const useMutationData = (
   mutationKey: MutationKey,
-  mutationFn: MutationFunction<
-    { status: number; data: string },
-    { name: string; id: string; createdAt: Date; keywords: [] }
-  >,
+  mutationFn: MutationFunction<any, any>,
   queryKey?: string,
   onSuccess?: () => void
 ) => {

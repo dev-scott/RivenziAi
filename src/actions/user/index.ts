@@ -4,7 +4,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { createUser, findUser } from './queries';
 import { refreshToken } from '@/lib/fetch';
-import { updateIntegration } from '../integration/queries';
+import { updateIntegration } from '../integrations/queries';
 
 export const onCurrentUser = async () => {
   const user = await currentUser();
