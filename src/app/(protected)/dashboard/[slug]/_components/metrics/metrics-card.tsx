@@ -6,11 +6,11 @@ const MetricsCard = () => {
   const { data } = useQueryAutomations();
   console.log('data in metric', data);
   const comments = data?.data.reduce((current, next) => {
-    return current + next.listener!.commentCount!;
+    return current + (next.listener ? next.listener.commentCount : 0);
   }, 0);
 
   const dms = data?.data?.reduce((current, next) => {
-    return current + next.listener!.dmCount!;
+    return current + (next.listener ? next.listener!.dmCount : 0);
   }, 0);
 
   return (
