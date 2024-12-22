@@ -1,7 +1,10 @@
+import { onDowngradeSubscription } from '@/actions/user';
 import { Button } from '@/components/ui/button';
 import { PLANS } from '@/constants/pages';
+import { useSubscription } from '@/hooks/use-subscription';
 import { cn } from '@/lib/utils';
 import { CircleCheck } from 'lucide-react';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 type Props = {
@@ -11,6 +14,22 @@ type Props = {
 };
 
 const PaymentCard = ({ current, label, landing }: Props) => {
+  const { onSubscribe, isProcessing } = useSubscription();
+
+  const makeSubscription = async () => {
+    if (current == 'FREE' && current != label) {
+      onSubscribe();
+    }
+
+    if (current == 'PRO' && current != label) {
+      const customer = await onDowngradeSubscription();
+
+      if (customer.status === 200) {
+        return redirect('/dashboard');
+      }
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -82,6 +101,7 @@ const PaymentCard = ({ current, label, landing }: Props) => {
           </Button>
         ) : (
           <Button
+            onClick={makeSubscription}
             className='hover:text-background-80 mt-5 rounded-xl bg-primary text-white'
             disabled={label === current}
           >
