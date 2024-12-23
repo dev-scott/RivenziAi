@@ -17,11 +17,11 @@ const PaymentCard = ({ current, label, landing }: Props) => {
   const { onSubscribe, isProcessing } = useSubscription();
 
   const makeSubscription = async () => {
-    if (current == 'FREE' && current != label) {
+    if (current == 'FREE' && label !== current) {
       onSubscribe();
     }
 
-    if (current == 'PRO' && current != label) {
+    if (current == 'PRO' && label !== current) {
       const customer = await onDowngradeSubscription();
 
       if (customer.status === 200) {
