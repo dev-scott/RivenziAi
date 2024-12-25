@@ -31,7 +31,7 @@ const Page = async ({ searchParams }: Props) => {
     return (
       <div className='flex h-screen w-full flex-col items-center justify-center'>
         <h4 className='text-5xl font-bold'>404</h4>
-        <p className='text-xl font-bold'>Oops! Something went wrong</p>
+        <p className='text-xl font-bold'>Oops!! Something went wrong</p>
       </div>
     );
   }
