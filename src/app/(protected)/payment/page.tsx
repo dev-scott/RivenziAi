@@ -2,14 +2,12 @@ import { onSubscribe } from '@/actions/user';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
-type Props = {
-  searchParams: {
-    session_id?: string;
-    cancel?: boolean;
-  };
-};
-
-const Page = async ({ searchParams }: Props) => {
+// Next.js passe automatiquement les searchParams via le type PageProps
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: { session_id?: string; cancel?: boolean };
+}) => {
   const { session_id, cancel } = searchParams;
 
   if (session_id) {
