@@ -5,7 +5,8 @@ import { useSubscription } from '@/hooks/use-subscription';
 import { cn } from '@/lib/utils';
 import { CircleCheck } from 'lucide-react';
 import { redirect } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
+import Loader from '../loader';
 
 type Props = {
   label: string;
@@ -15,16 +16,20 @@ type Props = {
 
 const PaymentCard = ({ current, label, landing }: Props) => {
   const { onSubscribe, isProcessing } = useSubscription();
+  const [isLoading, setIsLoading] = useState(false);
 
   const makeSubscription = async () => {
+    setIsLoading(true);
     if (current == 'FREE' && label !== current) {
       onSubscribe();
+      setIsLoading(false);
     }
 
     if (current == 'PRO' && label !== current) {
       const customer = await onDowngradeSubscription();
 
       if (customer.status === 200) {
+        setIsLoading(false);
         return redirect('/dashboard');
       }
     }
@@ -110,6 +115,7 @@ const PaymentCard = ({ current, label, landing }: Props) => {
               : current === 'PRO'
                 ? 'Downgrade'
                 : 'Upgrade'}
+            <Loader state={isLoading}> </Loader>
           </Button>
         )}
       </div>

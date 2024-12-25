@@ -2,11 +2,14 @@ import { onSubscribe } from '@/actions/user';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
-const Page = async ({
-  searchParams,
-}: {
-  searchParams: { session_id?: string; cancel?: boolean };
-}) => {
+type Props = {
+  searchParams: {
+    session_id?: string;
+    cancel?: boolean;
+  };
+};
+
+const Page = async ({ searchParams }: Props) => {
   const { session_id, cancel } = searchParams;
 
   if (session_id) {
