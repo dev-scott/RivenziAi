@@ -9,13 +9,13 @@ type Props = {
   };
 };
 
-const Page = async ({ searchParams: { cancel, session_id } }: Props) => {
+const Page = ({ searchParams: { cancel, session_id } }: Props) => {
   if (session_id) {
-    const customer = await onSubscribe(session_id);
+    const customer = onSubscribe(session_id);
 
-    if (customer.status === 200) {
-      return redirect('/dashboard');
-    }
+    // if (customer.status === 200) {
+    //   return redirect('/dashboard');
+    // }
 
     return (
       <div className='flex h-screen w-full flex-col items-center justify-center'>
