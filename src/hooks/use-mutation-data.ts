@@ -17,7 +17,7 @@ export const useMutationDataState = (mutationKey: MutationKey) => {
       };
     },
   });
-  const latestVariable = data[data.length - 1];
+  const latestVariable: any = data[data.length - 1];
   return { latestVariable };
 };
 

@@ -13,7 +13,7 @@ const UpgradeCard = (props: Props) => {
         </span>
       </span>
 
-      <p className='text-sm font-light text-white'>
+      <p className='text-sm font-light text-foreground'>
         Unlock all feature <br /> including Ai and more
       </p>
       <PaymentButton />

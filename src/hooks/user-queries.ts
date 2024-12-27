@@ -1,6 +1,7 @@
 import {
   getAllAutomations,
-  // getAutomationInfo,
+  getAutomationInfo,
+  getProfilePosts,
   // getProfilePosts,
 } from '@/actions/automations';
 import { onUserInfo } from '@/actions/user';
@@ -13,12 +14,12 @@ export const useQueryAutomations = () => {
   });
 };
 
-// export const useQueryAutomation = (id: string) => {
-//   return useQuery({
-//     queryKey: ['automation-info'],
-//     queryFn: () => getAutomationInfo(id),
-//   })
-// }
+export const useQueryAutomation = (id: string) => {
+  return useQuery({
+    queryKey: ['automation-info'],
+    queryFn: () => getAutomationInfo(id),
+  });
+};
 
 export const useQueryUser = () => {
   return useQuery({
@@ -27,10 +28,10 @@ export const useQueryUser = () => {
   });
 };
 
-// export const useQueryAutomationPosts = () => {
-//   const fetchPosts = async () => await getProfilePosts()
-//   return useQuery({
-//     queryKey: ['instagram-media'],
-//     queryFn: fetchPosts,
-//   })
-// }
+export const useQueryAutomationPosts = () => {
+  const fetchPosts = async () => await getProfilePosts();
+  return useQuery({
+    queryKey: ['instagram-media'],
+    queryFn: fetchPosts,
+  });
+};
