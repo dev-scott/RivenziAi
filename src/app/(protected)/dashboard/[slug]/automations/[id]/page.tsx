@@ -1,4 +1,5 @@
 import { getAutomationInfo } from '@/actions/automations';
+import Trigger from '@/components/global/automations/trigger';
 import AutomationsBreadCrumb from '@/components/global/bread-crumbs/automations';
 import { Warning } from '@/icons';
 import { PrefetchUserAutomation } from '@/react-query/prefetch';
@@ -28,12 +29,12 @@ const Page = async ({ params }: Props) => {
     <HydrationBoundary state={dehydrate(query)}>
       <div className='flex flex-col items-start gap-y-20'>
         <AutomationsBreadCrumb id={params.id} />
-        <div className='xl:6/12 flex w-full flex-col gap-y-3 rounded-xl bg-slate-900 p-5 lg:w-10/12'>
-          <div>
+        <div className='xl:6/12 flex w-full flex-col gap-y-3 rounded-xl border-[1px] border-slate-900 border-opacity-10 p-5 lg:w-10/12'>
+          <div className='flex gap-x-2'>
             <Warning />
             When ...
           </div>
-          {/* <Trigger id={params.id} /> */}
+          <Trigger id={params.id} />
         </div>
       </div>
     </HydrationBoundary>

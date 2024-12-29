@@ -4,6 +4,8 @@ import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import ReactQueryProvider from '@/providers/react-query-provider';
 import { Toaster } from 'sonner';
+import { ThemeProvider } from '@/providers/theme-provider';
+import ReduxProvider from '@/providers/redux-provider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -30,10 +32,19 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang='en' className={` ${inter.className} `}>
         <body className='flex min-h-full flex-col bg-white text-foreground antialiased'>
-          <main className='relative flex flex-1 flex-col'>
-            <ReactQueryProvider>{children}</ReactQueryProvider>
-            <Toaster />
-          </main>
+          {/* <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          > */}
+          <ReduxProvider>
+            <main className='relative flex flex-1 flex-col'>
+              <ReactQueryProvider>{children}</ReactQueryProvider>
+              <Toaster />
+            </main>
+          </ReduxProvider>
+          {/* </ThemeProvider> */}
         </body>
       </html>
     </ClerkProvider>
