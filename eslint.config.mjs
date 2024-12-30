@@ -11,7 +11,6 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  // ...compat.extends('next/core-web-vitals', 'next/typescript'),
   ...compat.extends(),
   {
     ignores: [
@@ -21,11 +20,7 @@ const eslintConfig = [
       '*.min.js', // Ignore minified JS files
     ],
     rules: {
-      // Désactive les règles suivantes
-      // '@typescript-eslint/no-unused-vars': 'off', // Ignore les variables inutilisées
-      // '@typescript-eslint/no-explicit-any': 'off', // Permet l'utilisation de `any`
-      // '@typescript-eslint/no-empty-object-type': 'off', // Désactive l'interdiction du type vide "{}"
-      // '@typescript-eslint/no-restricted-types': 'off', // Permet l'utilisation de types comme `Function`, `Object`, etc.
+      // Disable all ESLint rules globally
       '*': 'off',
     },
   },
