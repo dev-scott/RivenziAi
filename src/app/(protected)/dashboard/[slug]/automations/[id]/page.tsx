@@ -12,9 +12,9 @@ import {
 } from '@tanstack/react-query';
 import React from 'react';
 
-type Props = {
-  params: { id: string };
-};
+// type Props = {
+//   params: { id: string };
+// };
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const info: any = await getAutomationInfo(params.id);
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-const Page = async ({ params }: Props) => {
+const Page = async ({ params }: { params: { id: string } }) => {
   const query = new QueryClient();
   await PrefetchUserAutomation(query, params.id);
 
