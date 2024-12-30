@@ -15,7 +15,7 @@ const PostNode = ({ id }: Props) => {
   return (
     data?.data &&
     data.data.posts.length > 0 && (
-      <div className='relative flex w-10/12 flex-col gap-y-3 rounded-xl bg-[#1D1D1D] p-5 lg:w-8/12 xl:w-4/12'>
+      <div className='relative flex w-10/12 flex-col gap-y-3 rounded-xl border-[1px] border-slate-900 border-opacity-20 bg-white p-5 lg:w-8/12 xl:w-4/12'>
         <div className='absolute bottom-full left-1/2 z-50 flex h-20 flex-col items-center'>
           <span className='bg-connector/10 h-[9px] w-[9px] rounded-full' />
           <Separator

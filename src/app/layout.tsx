@@ -31,7 +31,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang='en' className={` ${inter.className} `}>
-        <body className='flex min-h-full flex-col bg-white text-foreground antialiased'>
+        <body
+          suppressHydrationWarning
+          className='flex min-h-full flex-col bg-white text-foreground antialiased'
+        >
           {/* <ThemeProvider
             attribute="class"
             defaultTheme="system"
