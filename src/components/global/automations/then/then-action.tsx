@@ -51,14 +51,14 @@ const ThenAction = ({ id }: Props) => {
               key={listener.id}
               className={cn(
                 Listener === listener.type
-                  ? 'bg-gradient-to-br from-[#3352CC] to-[#1C2D70]'
-                  : 'bg-background-80',
+                  ? 'bg-gradient-to-br from-[#3352CC] to-[#1C2D70] text-white'
+                  : 'bg-background-80 text-white',
                 'flex cursor-pointer flex-col gap-y-2 rounded-xl p-3 transition duration-100 hover:opacity-80'
               )}
             >
               <div className='flex items-center gap-x-2'>
                 {listener.icon}
-                <p>{listener.label}</p>
+                <p className='text-white'>{listener.label}</p>
               </div>
               <p>{listener.description}</p>
             </div>
