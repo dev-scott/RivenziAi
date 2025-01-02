@@ -17,7 +17,7 @@ import React from 'react';
 // type Props = {
 //   params: { id: string };
 // };
-type Params = Promise<any>;
+type Params = Promise<{ id: string }>;
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const info: any = await getAutomationInfo(params.id);
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 
 const Page = async ({ params }: { params: Params }) => {
-  const { id } = await params;
+  const id = (await params).id;
   const query = new QueryClient();
   await PrefetchUserAutomation(query, id);
 
