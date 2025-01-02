@@ -17,7 +17,7 @@ import React from 'react';
 // type Props = {
 //   params: { id: string };
 // };
-type Params = Promise<{ id: string }>;
+type Params = Promise<any>;
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const info: any = await getAutomationInfo(params.id);
