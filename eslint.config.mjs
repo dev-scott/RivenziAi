@@ -24,7 +24,7 @@ const eslintConfig = [
       '@typescript-eslint/no-unused-vars': 'off', 
       '@typescript-eslint/no-explicit-any': 'off', // Permet l'utilisation de `any`
       '@typescript-eslint/no-empty-object-type': 'off', // Désactive l'interdiction du type vide "{}"
-      // '@typescript-eslint/no-restricted-types': 'off', // Permet l'utilisation de types comme `Function`, `Object`, etc.
+      '@typescript-eslint/no-restricted-types': 'off', // Permet l'utilisation de types comme `Function`, `Object`, etc.
     },
   },
 ];
