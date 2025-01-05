@@ -33,7 +33,7 @@ const Page = async ({ params }: { params: Params }) => {
     <HydrationBoundary state={dehydrate(query)}>
       <div className='flex flex-col items-center gap-y-20'>
         <AutomationsBreadCrumb id={params.id} />
-        <div className='flex w-full flex-col gap-y-3 rounded-xl bg-[#1D1D1D] p-5 lg:w-10/12 xl:w-6/12'>
+        <div className='flex w-full flex-col gap-y-3 rounded-xl border-[1px] border-slate-900 border-opacity-20 bg-white p-5 lg:w-10/12 xl:w-6/12'>
           <div className='flex gap-x-2'>
             <Warning />
             When...
