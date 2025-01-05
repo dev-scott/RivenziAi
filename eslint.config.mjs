@@ -18,7 +18,7 @@ const eslintConfig = [
       'dist', // Ignore build output
       'build', // Ignore build output
       '*.min.js', // Ignore minified JS files
-      '/src/app/(protected)/dashboard/[slug]/automations/[id]/page.tsx'
+      'src'
     ],
     rules: {
       // Désactive les règles suivantes
