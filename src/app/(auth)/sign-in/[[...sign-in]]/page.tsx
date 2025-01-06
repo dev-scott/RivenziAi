@@ -3,8 +3,12 @@
 import { SignIn } from '@clerk/nextjs';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
 
 export default function Page() {
+  const searchParam = useSearchParams();
+  const intent = searchParam.get('intent');
+  console.log('here is the intent', intent);
   return (
     <div className='relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden md:flex-row'>
       {/* Background Pattern */}
@@ -119,6 +123,9 @@ export default function Page() {
                 showOptionalFields: false,
               },
             }}
+            forceRedirectUrl={
+              intent ? `/dashboard?intent=${intent}` : `/dashboard`
+            }
           />
         </div>
       </motion.div>

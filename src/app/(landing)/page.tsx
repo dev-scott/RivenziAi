@@ -10,15 +10,24 @@ import {
   Brain,
   Combine,
   History,
+  Loader2,
   MessageSquare,
   Sparkles,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import { client } from '@/lib/prisma';
+import { useSubscription } from '@/hooks/use-subscription';
 
 export default function Home() {
   const [pricingPeriod, setPricingPeriod] = useState<'month' | 'year'>('month');
   const [isMobile, setIsMobile] = useState(false);
+
+  const { user } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     setIsMobile(window.innerWidth <= 768);
@@ -105,77 +114,77 @@ export default function Home() {
   ];
 
   const pricingData = [
+    // {
+    //   title: 'Starter',
+    //   description:
+    //     'Perfect for small businesses starting with social media automation',
+    //   pricing: {
+    //     month: '29',
+    //     year: '290', // 2 months free
+    //   },
+    //   feature: [
+    //     {
+    //       name: 'Connect up to 3 social media accounts',
+    //       active: true,
+    //     },
+    //     {
+    //       name: '100 automated responses per month',
+    //       active: true,
+    //     },
+    //     {
+    //       name: '5 custom AI triggers',
+    //       active: true,
+    //     },
+    //     {
+    //       name: 'Basic analytics dashboard',
+    //       active: true,
+    //     },
+    //     {
+    //       name: 'Email support',
+    //       active: true,
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: 'Professional',
+    //   description: 'Ideal for growing businesses with active social presence',
+    //   pricing: {
+    //     month: '79',
+    //     year: '790', // 2 months free
+    //   },
+    //   feature: [
+    //     {
+    //       name: 'Connect up to 10 social media accounts',
+    //       active: true,
+    //     },
+    //     {
+    //       name: 'Unlimited automated responses',
+    //       active: true,
+    //     },
+    //     {
+    //       name: '20 custom AI triggers',
+    //       active: true,
+    //     },
+    //     {
+    //       name: 'Advanced analytics & reporting',
+    //       active: true,
+    //     },
+    //     {
+    //       name: 'Priority support with 4h response time',
+    //       active: true,
+    //     },
+    //     {
+    //       name: 'Custom AI training',
+    //       active: true,
+    //     },
+    //     {
+    //       name: 'Team collaboration tools',
+    //       active: true,
+    //     },
+    //   ],
+    // },
     {
-      title: 'Starter',
-      description:
-        'Perfect for small businesses starting with social media automation',
-      pricing: {
-        month: '29',
-        year: '290', // 2 months free
-      },
-      feature: [
-        {
-          name: 'Connect up to 3 social media accounts',
-          active: true,
-        },
-        {
-          name: '100 automated responses per month',
-          active: true,
-        },
-        {
-          name: '5 custom AI triggers',
-          active: true,
-        },
-        {
-          name: 'Basic analytics dashboard',
-          active: true,
-        },
-        {
-          name: 'Email support',
-          active: true,
-        },
-      ],
-    },
-    {
-      title: 'Professional',
-      description: 'Ideal for growing businesses with active social presence',
-      pricing: {
-        month: '79',
-        year: '790', // 2 months free
-      },
-      feature: [
-        {
-          name: 'Connect up to 10 social media accounts',
-          active: true,
-        },
-        {
-          name: 'Unlimited automated responses',
-          active: true,
-        },
-        {
-          name: '20 custom AI triggers',
-          active: true,
-        },
-        {
-          name: 'Advanced analytics & reporting',
-          active: true,
-        },
-        {
-          name: 'Priority support with 4h response time',
-          active: true,
-        },
-        {
-          name: 'Custom AI training',
-          active: true,
-        },
-        {
-          name: 'Team collaboration tools',
-          active: true,
-        },
-      ],
-    },
-    {
-      title: 'Enterprise',
+      title: 'Pro',
       description: 'For large organizations requiring maximum automation power',
       pricing: {
         month: '199',
@@ -202,25 +211,34 @@ export default function Home() {
           name: '24/7 dedicated support',
           active: true,
         },
-        {
-          name: 'Advanced AI customization',
-          active: true,
-        },
-        {
-          name: 'API access',
-          active: true,
-        },
-        {
-          name: 'Custom integration development',
-          active: true,
-        },
-        {
-          name: 'SLA guarantee',
-          active: true,
-        },
+        // {
+        //   name: 'Advanced AI customization',
+        //   active: true,
+        // },
+        // {
+        //   name: 'API access',
+        //   active: true,
+        // },
+        // {
+        //   name: 'Custom integration development',
+        //   active: true,
+        // },
+        // {
+        //   name: 'SLA guarantee',
+        //   active: true,
+        // },
       ],
     },
   ];
+  const { onSubscribe, isProcessing } = useSubscription();
+
+  const handleGetAccess = () => {
+    if (user) {
+      onSubscribe();
+    } else {
+      router.push('/sign-in?intent=upgrade');
+    }
+  };
 
   return (
     <>
@@ -352,10 +370,10 @@ export default function Home() {
                   Yearly billing
                 </button>
               </div>
-              <div className='mt-12 space-y-3 sm:mt-16 sm:grid sm:grid-cols-3 sm:gap-6 sm:space-y-0 md:mx-auto md:max-w-5xl xl:grid-cols-3'>
+              <div className='mt-12 w-full space-y-3 sm:mt-16 sm:gap-6 sm:space-y-0 md:mx-auto'>
                 {pricingData.map((pricing, key) => (
                   <div
-                    className='divide-y divide-slate-200 rounded-lg border border-slate-200 shadow-sm'
+                    className='flex w-full flex-row flex-wrap divide-y divide-slate-200 rounded-lg border border-slate-200 shadow-sm'
                     key={key}
                   >
                     <div className='p-6'>
@@ -388,13 +406,18 @@ export default function Home() {
                         </p>
                       )}
 
-                      <Link
-                        href='/sign-up'
-                        className='mt-8 block w-full rounded-md bg-primary py-2 text-center text-sm font-semibold text-white'
+                      <button
+                        onClick={handleGetAccess}
+                        className='mt-8 flex w-full flex-row items-center justify-center rounded-md bg-primary py-2 text-center text-sm font-semibold text-white'
                       >
-                        Join as a {pricing.title}
-                      </Link>
+                        {isProcessing ? (
+                          <Loader2 className='animate-spin' />
+                        ) : (
+                          `Join as a ${pricing.title}`
+                        )}
+                      </button>
                     </div>
+
                     <div className='px-6 pb-8 pt-6'>
                       <h3 className='text-sm font-bold uppercase tracking-wide text-slate-900'>
                         What&apos;s included

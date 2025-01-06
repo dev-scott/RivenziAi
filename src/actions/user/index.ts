@@ -54,6 +54,7 @@ export const onBoardUser = async () => {
         data: {
           firstname: found.firstname,
           lastname: found.lastname,
+          subscription: found.subscription?.plan,
         },
       };
     }

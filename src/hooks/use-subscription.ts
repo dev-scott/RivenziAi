@@ -8,7 +8,7 @@ export const useSubscription = () => {
     setIsProcessing(true);
     const response = await axios.get('/api/payment');
     if (response.data.status === 200) {
-      console.log('resposne.data', response.data);
+      console.log('resposne.data', response);
       return (window.location.href = `${response.data.session_url}`);
     }
     setIsProcessing(false);
