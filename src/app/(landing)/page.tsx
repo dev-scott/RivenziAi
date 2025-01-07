@@ -261,7 +261,7 @@ export default function Home() {
               </div>
 
               <h1 className='text-center text-base font-semibold md:text-3xl'>
-                Empower Your Social Media: Automate, Engage, Succeed!
+                Empower Your Social Media: Automate, Engage, Succeed!!!
               </h1>
               <span className='text-center'>
                 {isMobile ? (
