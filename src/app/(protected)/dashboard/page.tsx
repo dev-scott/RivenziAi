@@ -1,4 +1,3 @@
-'use client';
 import { onBoardUser, onCurrentUser, onUserInfo } from '@/actions/user';
 import { currentUser } from '@clerk/nextjs/server';
 import axios from 'axios';
