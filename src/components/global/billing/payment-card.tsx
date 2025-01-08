@@ -21,7 +21,7 @@ const PaymentCard = ({ current, label, landing }: Props) => {
   const makeSubscription = async () => {
     setIsLoading(true);
     if (current == 'FREE' && label !== current) {
-      onSubscribe();
+      onSubscribe('month');
       setIsLoading(false);
     }
 
@@ -76,7 +76,7 @@ const PaymentCard = ({ current, label, landing }: Props) => {
         )}
         {label === 'PRO' ? (
           <p className='mb-2'>
-            <b className='text-xl'>$99</b>/month
+            <b className='text-xl'>$199</b>/month
           </p>
         ) : (
           <p className='mb-2 text-xl'>Free</p>

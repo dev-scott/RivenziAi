@@ -234,7 +234,7 @@ export default function Home() {
 
   const handleGetAccess = () => {
     if (user) {
-      onSubscribe();
+      onSubscribe(pricingPeriod);
     } else {
       router.push('/sign-in?intent=upgrade');
     }
