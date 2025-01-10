@@ -10,7 +10,7 @@ const PaymentButton = (props: Props) => {
   return (
     <Button
       disabled={isProcessing}
-      onClick={onSubscribe}
+      onClick={() => onSubscribe('month')}
       className='rounded-xl bg-gradient-to-br from-[#6d60a3] via-primary to-[#CC3BD4] font-bold text-white'
     >
       {isProcessing ? <Loader2 className='animate-spin' /> : <CreditCardIcon />}
