@@ -17,7 +17,7 @@ const Sidebar = ({ slug }: Props) => {
   return (
     <div className='fixed bottom-0 left-0 top-0 hidden w-[250px] overflow-hidden border-[1px] p-3 lg:inline-block'>
       <div className='flex h-full w-full flex-col gap-y-5'>
-        <div className='px-3'>Rivenzi</div>
+        <div className='px-3'>Rivenzi.</div>
         <div className='flex flex-col py-3'>
           <Items page={page} slug={slug} />
         </div>
