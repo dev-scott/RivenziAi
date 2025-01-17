@@ -255,7 +255,7 @@ export default function Home() {
               <div className='flex flex-col items-center gap-2 md:flex-row'>
                 <span className='rounded-full bg-primary px-5 py-2 text-xs text-white'>
                   {' '}
-                  New !
+                  New !!
                 </span>
                 Update New features active users ✨
               </div>
