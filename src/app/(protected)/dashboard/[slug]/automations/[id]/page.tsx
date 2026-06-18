@@ -18,30 +18,36 @@ type Params = {
   id: string;
 };
 
-export async function generateMetadata({ params }: { params: Params }) {
-  const info = await getAutomationInfo(params.id);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { id } = await params;
+  const info = await getAutomationInfo(id);
   return {
     title: info.data?.name,
   };
 }
 
-const Page = async ({ params }: { params: Params }) => {
+const Page = async ({ params }: { params: Promise<Params> }) => {
+  const { id } = await params;
   const query = new QueryClient();
-  await PrefetchUserAutomation(query, params.id);
+  await PrefetchUserAutomation(query, id);
 
   return (
     <HydrationBoundary state={dehydrate(query)}>
       <div className='flex flex-col items-start gap-y-20'>
-        <AutomationsBreadCrumb id={params.id} />
+        <AutomationsBreadCrumb id={id} />
         <div className='flex w-full flex-col gap-y-3 rounded-xl border-[1px] border-slate-900 border-opacity-20 bg-white p-5 lg:w-10/12 xl:w-6/12'>
           <div className='flex gap-x-2'>
             <Warning />
             When...
           </div>
-          <Trigger id={params.id} />
+          <Trigger id={id} />
         </div>
-        <ThenNode id={params.id} />
-        <PostNode id={params.id} />
+        <ThenNode id={id} />
+        <PostNode id={id} />
       </div>
     </HydrationBoundary>
   );

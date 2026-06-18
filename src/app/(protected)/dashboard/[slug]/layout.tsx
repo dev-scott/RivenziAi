@@ -12,11 +12,12 @@ import {
 } from '@/react-query/prefetch';
 type Props = {
   children: React.ReactNode;
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 const layout = async ({ children, params }: Props) => {
-  console.log('param', params.slug);
+  const { slug } = await params;
+  console.log('param', slug);
 
   const query = new QueryClient();
 
@@ -27,11 +28,11 @@ const layout = async ({ children, params }: Props) => {
     <HydrationBoundary state={dehydrate(query)}>
       <div className='p-3'>
         {/* there is the side bar */}
-        <Sidebar slug={params.slug} />
+        <Sidebar slug={slug} />
         <div className='flex flex-col overflow-auto lg:ml-[250px] lg:pl-10'>
           {/* info bar */}
 
-          <InfoBar slug={params.slug} />
+          <InfoBar slug={slug} />
 
           {children}
         </div>

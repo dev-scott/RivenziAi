@@ -32,21 +32,36 @@ export const onBoardUser = async () => {
           : 0;
 
         const days = Math.round(time_left / (1000 * 3600 * 24));
-        if (days < 5) {
+        if (days < 5 && days >= 0) {
+          // Token is close to expiry — attempt a refresh
           console.log('refresh');
-          const refresh = await refreshToken(found.integrations[0].token);
-          const today = new Date();
+          try {
+            const refresh = await refreshToken(found.integrations[0].token);
+            const today = new Date();
 
-          const expire_date = today.setDate(today.getDate() + 60);
+            const expire_date = today.setDate(today.getDate() + 60);
 
-          const update_token = await updateIntegration(
-            refresh.access_token,
-            new Date(expire_date),
-            found.integrations[0].id
-          );
-          if (!update_token) {
-            console.log('Update token failed');
+            const update_token = await updateIntegration(
+              refresh.access_token,
+              new Date(expire_date),
+              found.integrations[0].id
+            );
+            if (!update_token) {
+              console.log('Update token failed');
+            }
+          } catch (refreshError) {
+            // Token refresh failed (e.g. token already expired/revoked).
+            // Log and continue — the user will need to reconnect Instagram.
+            console.log(
+              'Token refresh failed — user may need to reconnect Instagram:',
+              refreshError
+            );
           }
+        } else if (days < 0) {
+          // Token is fully expired — cannot refresh, user must reconnect
+          console.log(
+            'Instagram token is fully expired. User needs to reconnect their Instagram account.'
+          );
         }
       }
       return {

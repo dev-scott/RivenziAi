@@ -4,9 +4,9 @@ import axios from 'axios';
 import { redirect } from 'next/navigation';
 
 interface PageProps {
-  searchParams: {
+  searchParams: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 }
 
 const page = async ({ searchParams }: PageProps) => {
@@ -18,7 +18,7 @@ const page = async ({ searchParams }: PageProps) => {
     return redirect('/sign-in');
   }
 
-  const intent = searchParams.intent;
+  const { intent } = await searchParams;
 
   if (user.status === 200 || user.status == 201) {
     if (intent == 'upgrade' && myUser.data?.subscription?.plan != 'PRO') {
