@@ -13,7 +13,7 @@ const Page = () => {
         <div className='flex flex-col gap-y-5 overflow-hidden rounded-xl border-[1px] border-foreground/15 p-5'>
           <div>
             <h2 className='text-xl text-foreground'>Automation</h2>
-            <p>Your live automations will show here.</p>
+            <p>Your live automations will show here..</p>
           </div>
           <CreateAutomation />
         </div>
